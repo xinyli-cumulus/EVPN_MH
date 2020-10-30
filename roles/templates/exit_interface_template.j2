@@ -1,0 +1,77 @@
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+source /etc/network/interfaces.d/*.intf
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+    # The primary network interface
+    address {{ switches[ansible_hostname].lo.ipv4 }}
+    address {{ switches[ansible_hostname].lo.ipv4_rp}}
+
+# The primary network interface
+auto eth0
+iface eth0 inet dhcp
+	vrf mgmt
+
+auto mgmt
+iface mgmt
+	address 127.0.0.1/8
+	address ::1/128
+	vrf-table auto
+
+{% for item in switches[ansible_hostname].tointernet %}
+auto {{ item }}
+iface {{ item }}
+
+{% endfor %}
+
+{% for item in switches[ansible_hostname].fabriclinks %}
+auto {{ item }}
+iface {{ item }}
+
+{% endfor %}
+
+{% for item in switches[ansible_hostname].VRF %}
+auto {{ item }}
+iface {{ item }}
+    vrf-table auto
+{% endfor %}
+
+auto bridge
+iface bridge
+    bridge-ports {{ switches[ansible_hostname].bridge_ports }}
+    bridge-vids {{ switches[ansible_hostname].bridge_vlans }}
+    bridge-vlan-aware yes
+
+{% for int in switches[ansible_hostname].interfaces %}
+{%   set interface = switches[ansible_hostname].interfaces[int] %}
+{% if interface.type == "svi" %}
+auto vlan{{ interface.vlan }}
+iface vlan{{ interface.vlan }}
+    address interface.address
+    vlan-id {{ interface.vlan }}
+    vlan-raw-device bridge
+    vrf {{ interface.vrf}}
+
+{% elif interface.type == "svi_l3_vni" %}
+auto vlan{{ interface.vlan }}
+iface vlan{{ interface.vlan }}
+    vlan-id {{ interface.vlan }}
+    vlan-raw-device bridge
+    vrf {{ interface.vrf}}
+
+{% elif interface.type == "l3_vni" %}
+auto vni{{interface.vxlan_id}}
+iface vni{{interface.vxlan_id}}
+    bridge-access {{interface.vlan}}
+    bridge-learning off
+    mstpctl-bpduguard yes
+    mstpctl-portbpdufilter yes
+    vxlan-id {{interface.vxlan_id}}
+    vxlan-local-tunnelip {{ switches[ansible_hostname].lo.ipv4 | replace("/32", "") }}
+
+{% else %}
+{% endif %}
+{% endfor %}
