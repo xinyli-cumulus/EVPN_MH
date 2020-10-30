@@ -1,0 +1,331 @@
+---
+switches:
+  spine01:
+    fabriclinks: [swp1,swp2,swp3,swp4,swp29,swp30]
+    peerlinks: [swp31,swp32]
+    lo:
+      ipv4: 10.0.0.21/32
+    bgp_as: 65020
+
+  spine02:
+    fabriclinks: [swp1,swp2,swp3,swp4,swp29,swp30]
+    peerlinks: [swp31,swp32]
+    lo:
+      ipv4: 10.0.0.22/32
+    bgp_as: 65020
+
+  leaf01:
+    fabriclinks: [swp51,swp52]
+    serverports: [swp1,swp2]
+    serverbonds: [Po1,Po2]
+    lo:
+      ipv4: 10.0.0.11/32
+    interfaces:
+      vlan10:
+        type: svi
+        address: 192.168.10.1/24
+        vrr_address: 192.168.10.254/24
+        vrr_mac: 00:00:5e:00:00:10
+        vlan: 10
+        vrf: TENANT-A
+      vlan20:
+        type: svi
+        address: 192.168.20.1/24
+        vrr_address: 192.168.20.254/24
+        vrr_mac: 00:00:5e:00:00:20
+        vlan: 20
+        vrf: TENANT-A
+      vlan4001:
+        type: svi_l3_vni
+        vlan: 4001
+        vrf: TENANT-A
+      vni10010:
+        type: l2_vni
+        vlan: 10
+        vxlan_id: 10010
+        mcastgrp: 239.0.0.10
+      vni10020:
+        type: l2_vni
+        vlan: 20
+        vxlan_id: 10020
+        mcastgrp: 239.0.0.20
+      vni104001:
+        type: l3_vni
+        vlan: 4001
+        vxlan_id: 104001
+      Po1:
+        name: Po1
+        type: bond
+        vlan: 10
+        port: swp1
+        es-sys-mac: 44:38:39:ff:00:12
+        es-id: 1
+        es-df-pref: 50000
+      Po2:
+        name: Po2
+        type: bond
+        vlan: 20
+        port: swp2
+        es-sys-mac: 44:38:39:ff:00:12
+        es-id: 2
+        es-df-pref: 50000
+    bridge_ports: "vni10010 vni10020 vni104001 Po1 Po2"
+    bridge_vlans: "10 20 4001"
+    VRF:
+      - TENANT-A
+    bgp_as: 65011
+
+  leaf02:
+    fabriclinks: [swp51,swp52]
+    serverports: [swp1,swp2]
+    serverbonds: [Po1,Po2]
+    lo:
+      ipv4: 10.0.0.12/32
+    interfaces:
+      vlan10:
+        type: svi
+        address: 192.168.10.2/24
+        vrr_address: 192.168.10.254/24
+        vrr_mac: 00:00:5e:00:00:10
+        vlan: 10
+        vrf: TENANT-A
+      vlan20:
+        type: svi
+        address: 192.168.20.2/24
+        vrr_address: 192.168.20.254/24
+        vrr_mac: 00:00:5e:00:00:20
+        vlan: 20
+        vrf: TENANT-A
+      vlan4001:
+        type: svi_l3_vni
+        vlan: 4001
+        vrf: TENANT-A
+      vni10010:
+        type: l2_vni
+        vlan: 10
+        vxlan_id: 10010
+        mcastgrp: 239.0.0.10
+      vni10020:
+        type: l2_vni
+        vlan: 20
+        vxlan_id: 10020
+        mcastgrp: 239.0.0.20
+      vni104001:
+        type: l3_vni
+        vlan: 4001
+        vxlan_id: 104001
+      Po1:
+        name: Po1
+        type: bond
+        vlan: 10
+        port: swp1
+        es-sys-mac: 44:38:39:ff:00:12
+        es-id: 1
+        es-df-pref: 10000
+      Po2:
+        name: Po2
+        type: bond
+        vlan: 20
+        port: swp2
+        es-sys-mac: 44:38:39:ff:00:12
+        es-id: 2
+        es-df-pref: 10000
+    bridge_ports: "vni10010 vni10020 vni104001 Po1 Po2"
+    bridge_vlans: "10 20 4001"
+    VRF:
+      - TENANT-A
+    bgp_as: 65012
+
+  leaf03:
+    fabriclinks: [swp51,swp52]
+    serverports: [swp1,swp2]
+    serverbonds: [Po1,Po2]
+    lo:
+      ipv4: 10.0.0.13/32
+    interfaces:
+      vlan10:
+        type: svi
+        address: 192.168.10.3/24
+        vrr_address: 192.168.10.254/24
+        vrr_mac: 00:00:5e:00:00:10
+        vlan: 10
+        vrf: TENANT-A
+      vlan40:
+        type: svi
+        address: 192.168.40.3/24
+        vrr_address: 192.168.40.254/24
+        vrr_mac: 00:00:5e:00:00:40
+        vlan: 40
+        vrf: TENANT-A
+      vlan4001:
+        type: svi_l3_vni
+        vlan: 4001
+        vrf: TENANT-A
+      vni10010:
+        type: l2_vni
+        vlan: 10
+        vxlan_id: 10010
+        mcastgrp: 239.0.0.10
+      vni10040:
+        type: l2_vni
+        vlan: 40
+        vxlan_id: 10040
+        mcastgrp: 239.0.0.40
+      vni104001:
+        type: l3_vni
+        vlan: 4001
+        vxlan_id: 104001
+      Po1:
+        name: Po1
+        type: bond
+        vlan: 10
+        port: swp1
+        es-sys-mac: 44:38:39:ff:00:34
+        es-id: 1
+        es-df-pref: 50000
+      Po2:
+        name: Po2
+        type: bond
+        vlan: 40
+        port: swp2
+        es-sys-mac: 44:38:39:ff:00:34
+        es-id: 2
+        es-df-pref: 50000
+    bridge_ports: "vni10010 vni10040 vni104001 Po1 Po2"
+    bridge_vlans: "10 40 4001"
+    VRF:
+      - TENANT-A
+    bgp_as: 65013
+
+  leaf04:
+    fabriclinks: [swp51,swp52]
+    serverports: [swp1,swp2]
+    serverbonds: [Po1,Po2]
+    lo:
+      ipv4: 10.0.0.14/32
+    interfaces:
+      vlan10:
+        type: svi
+        address: 192.168.10.4/24
+        vrr_address: 192.168.10.254/24
+        vrr_mac: 00:00:5e:00:00:10
+        vlan: 10
+        vrf: TENANT-A
+      vlan40:
+        type: svi
+        address: 192.168.40.4/24
+        vrr_address: 192.168.40.254/24
+        vrr_mac: 00:00:5e:00:00:40
+        vlan: 40
+        vrf: TENANT-A
+      vlan4001:
+        type: svi_l3_vni
+        vlan: 4001
+        vrf: TENANT-A
+      vni10010:
+        type: l2_vni
+        vlan: 10
+        vxlan_id: 10010
+        mcastgrp: 239.0.0.10
+      vni10040:
+        type: l2_vni
+        vlan: 40
+        vxlan_id: 10040
+        mcastgrp: 239.0.0.40
+      vni104001:
+        type: l3_vni
+        vlan: 4001
+        vxlan_id: 104001
+      Po1:
+        name: Po1
+        type: bond
+        vlan: 10
+        port: swp1
+        es-sys-mac: 44:38:39:ff:00:34
+        es-id: 1
+        es-df-pref: 10000
+      Po2:
+        name: Po2
+        type: bond
+        vlan: 40
+        port: swp2
+        es-sys-mac: 44:38:39:ff:00:34
+        es-id: 2
+        es-df-pref: 10000
+    bridge_ports: "vni10010 vni10040 vni104001 Po1 Po2"
+    bridge_vlans: "10 40 4001"
+    VRF:
+      - TENANT-A
+    bgp_as: 65014
+
+  exit01:
+    fabriclinks: [swp51,swp52]
+    tointernet: swp44
+    lo:
+      ipv4: 10.0.0.41/32
+      ipv4_rp: 10.0.0.100/32
+    interfaces:
+      vlan4001:
+        type: svi_l3_vni
+        vlan: 4001
+        vrf: TENANT-A
+      vni104001:
+        type: l3_vni
+        vlan: 4001
+        vxlan_id: 104001
+      vlan1000:
+        type: svi
+        address: 100.0.0.2/30
+        vlan: 1000
+        vrf: TENANT-A
+    bridge_ports: "vni104001 swp44"
+    bridge_vlans: "1000 4001"
+    VRF:
+      - TENANT-A
+    bgp_as: 65041
+    bgp_peer_ip: 100.0.0.1
+
+  exit02:
+    fabriclinks: [swp51,swp52]
+    tointernet: swp44
+    lo:
+      ipv4: 10.0.0.42/32
+      ipv4_rp: 10.0.0.100/32
+    interfaces:
+      vlan4001:
+        type: svi_l3_vni
+        vlan: 4001
+        vrf: TENANT-A
+      vni104001:
+        type: l3_vni
+        vlan: 4001
+        vxlan_id: 104001
+      vlan1001:
+        type: svi
+        address: 100.0.0.6/30
+        vlan: 1000
+        vrf: TENANT-A
+    bridge_ports: "vni104001 swp44"
+    bridge_vlans: "1001 4001"
+    VRF:
+      - TENANT-A
+    bgp_as: 65042
+    bgp_peer_ip: 100.0.0.5
+
+servers:
+  server01:
+    address: 192.168.10.10
+    gw: 192.168.10.254
+    routes: [192.168.20.0/24,192.168.40.0/24,88.0.0.0/24]
+  server02:
+    address: 192.168.20.10
+    gw: 192.168.20.254
+    routes: [192.168.10.0/24,192.168.40.0/24,88.0.0.0/24]
+  server03:
+    address: 192.168.10.20
+    gw: 192.168.10.254
+    routes: [192.168.20.0/24,192.168.40.0/24,88.0.0.0/24]
+  server04:
+    address: 192.168.40.10
+    gw: 192.168.40.254
+    routes: [192.168.10.0/24,192.168.20.0/24,88.0.0.0/24]
