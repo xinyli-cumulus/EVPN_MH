@@ -303,7 +303,7 @@ switches:
       vlan1001:
         type: svi
         address: 100.0.0.6/30
-        vlan: 1000
+        vlan: 1001
         vrf: TENANT-A
     bridge_ports: "vni104001 swp44"
     bridge_vlans: "1001 4001"
