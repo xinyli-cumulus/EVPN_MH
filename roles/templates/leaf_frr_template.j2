@@ -24,7 +24,7 @@ route-map LOOPBACK permit 10
  match interface lo
 !
 {% for item in switches[ansible_hostname].serverbonds %}
-interface {{ item }}
+interface {{ item }}.name
  evpn mh es-sys-mac {{ switches[ansible_hostname].interfaces.{{ item }}.es_sys_mac }}
  evpn mh es-id {{ switches[ansible_hostname].interfaces.{{ item }}.es_id}}
  evpn mh es-df-pref {{ switches[ansible_hostname].interfaces.{{ item }}.es_df_pref }}
