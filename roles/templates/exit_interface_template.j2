@@ -50,7 +50,7 @@ iface bridge
 {% if interface.type == "svi" %}
 auto vlan{{ interface.vlan }}
 iface vlan{{ interface.vlan }}
-    address interface.address
+    address {{ interface.address }}
     vlan-id {{ interface.vlan }}
     vlan-raw-device bridge
     vrf {{ interface.vrf}}
