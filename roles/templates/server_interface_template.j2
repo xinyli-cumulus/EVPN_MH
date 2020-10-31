@@ -24,3 +24,4 @@ iface uplink inet static
   netmask 255.255.255.0
 {% for item in servers[ansible_hostname].routes %}
   post-up ip route add {{ item }} via {{ servers[ansible_hostname].gw }}
+{% endfor %}
