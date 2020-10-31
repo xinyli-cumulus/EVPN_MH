@@ -58,17 +58,17 @@ switches:
         type: bond
         vlan: 10
         port: swp1
-        es-sys-mac: 44:38:39:ff:00:12
-        es-id: 1
-        es-df-pref: 50000
+        es_sys_mac: 44:38:39:ff:00:12
+        es_id: 1
+        es_df_pref: 50000
       Po2:
         name: Po2
         type: bond
         vlan: 20
         port: swp2
-        es-sys-mac: 44:38:39:ff:00:12
-        es-id: 2
-        es-df-pref: 50000
+        es_sys_mac: 44:38:39:ff:00:12
+        es_id: 2
+        es_df_pref: 50000
     bridge_ports: "vni10010 vni10020 vni104001 Po1 Po2"
     bridge_vlans: "10 20 4001"
     VRF:
@@ -119,17 +119,17 @@ switches:
         type: bond
         vlan: 10
         port: swp1
-        es-sys-mac: 44:38:39:ff:00:12
-        es-id: 1
-        es-df-pref: 10000
+        es_sys_mac: 44:38:39:ff:00:12
+        es_id: 1
+        es_df_pref: 10000
       Po2:
         name: Po2
         type: bond
         vlan: 20
         port: swp2
-        es-sys-mac: 44:38:39:ff:00:12
-        es-id: 2
-        es-df-pref: 10000
+        es_sys_mac: 44:38:39:ff:00:12
+        es_id: 2
+        es_df_pref: 10000
     bridge_ports: "vni10010 vni10020 vni104001 Po1 Po2"
     bridge_vlans: "10 20 4001"
     VRF:
@@ -180,17 +180,17 @@ switches:
         type: bond
         vlan: 10
         port: swp1
-        es-sys-mac: 44:38:39:ff:00:34
-        es-id: 1
-        es-df-pref: 50000
+        es_sys_mac: 44:38:39:ff:00:34
+        es_id: 1
+        es_df_pref: 50000
       Po2:
         name: Po2
         type: bond
         vlan: 40
         port: swp2
-        es-sys-mac: 44:38:39:ff:00:34
-        es-id: 2
-        es-df-pref: 50000
+        es_sys_mac: 44:38:39:ff:00:34
+        es_id: 2
+        es_df_pref: 50000
     bridge_ports: "vni10010 vni10040 vni104001 Po1 Po2"
     bridge_vlans: "10 40 4001"
     VRF:
@@ -241,17 +241,17 @@ switches:
         type: bond
         vlan: 10
         port: swp1
-        es-sys-mac: 44:38:39:ff:00:34
-        es-id: 1
-        es-df-pref: 10000
+        es_sys_mac: 44:38:39:ff:00:34
+        es_id: 1
+        es_df_pref: 10000
       Po2:
         name: Po2
         type: bond
         vlan: 40
         port: swp2
-        es-sys-mac: 44:38:39:ff:00:34
-        es-id: 2
-        es-df-pref: 10000
+        es_sys_mac: 44:38:39:ff:00:34
+        es_id: 2
+        es_df_pref: 10000
     bridge_ports: "vni10010 vni10040 vni104001 Po1 Po2"
     bridge_vlans: "10 40 4001"
     VRF:

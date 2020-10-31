@@ -51,7 +51,7 @@ auto {{ interface.name }}
 iface {{ interface.name }}
     bond-slaves {{ interface.port }}
     bridge-access {{ interface.vlan }}
-    es-sys-mac {{ interface.es-sys-mac }}
+    es-sys-mac {{ interface.es_sys_mac }}
 
 {% elif interface.type == "svi" %}
 auto vlan{{ interface.vlan }}
